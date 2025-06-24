@@ -1,0 +1,133 @@
+/* 共通レイアウト */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* セクション（中央寄せ） */
+.section {
+    width: 90%;
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 40px auto; /* ← 横方向中央揃え */
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+/* タイトル */
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.accent {
+    color: #1e90ff;
+}
+
+/* 汎用フォーム */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-wrapper input[type="text"],
+.form-wrapper input[type="email"],
+.form-wrapper input[type="password"],
+.form-wrapper textarea {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.form-wrapper input:focus,
+.form-wrapper textarea:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 4px rgba(30,144,255,0.4);
+    outline: none;
+}
+
+
+
+/* 左上に固定表示するマイページボタン */
+.mypage-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;  /* ← right: 20px を left: 20px に変更 */
+    z-index: 999;
+}
+
+
+
+
+
+/* 汎用ボタン */
+.btn {
+    font-size: 1.1rem;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #1c7cd6;
+}
+
+/* 補足・通知エリア */
+.notice-box {
+    background-color: #eaf6ff;
+    padding: 20px;
+    border-left: 5px solid #1e90ff;
+    border-radius: 6px;
+    margin-top: 30px;
+}
+
+
+.star-rating {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    text-align: left;
+    margin: 10px 0 20px 0;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+    color: #f5c518;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #f5c518;
+}
