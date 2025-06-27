@@ -181,7 +181,7 @@ if (!empty($_GET['q'])) {
                     <div class="book-card">
                         <img src="<?= htmlspecialchars($image) ?>" alt="Book cover">
                         <div class="book-title">
-                            <a href="kansou.php?title=<?= urlencode($title) ?>" style="text-decoration: none; color: #1e90ff;">
+                            <a href="kannsou.php?title=<?= urlencode($title) ?>" style="text-decoration: none; color: #1e90ff;">
                               <?= htmlspecialchars($title) ?>
                             </a>
                         </div>
