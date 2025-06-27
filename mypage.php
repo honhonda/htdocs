@@ -17,9 +17,10 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // 自分のレビューのみ取得
-    $stmt = $pdo->query("SELECT title, rating, content FROM reviews ORDER BY created_at DESC");
-
+    $stmt = $pdo->prepare("SELECT title, rating, content FROM reviews WHERE user_id = ? ORDER BY created_at DESC");
     $stmt->execute([$user_id]);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
