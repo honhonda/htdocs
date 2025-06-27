@@ -12,12 +12,20 @@ $dbname = 'mydb';
 $user = 'testuser';
 $pass = 'pass';
 
+
+
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // タイトルに一致する感想を取得
-    $stmt = $pdo->prepare("SELECT username, content FROM reviews WHERE title = ?");
+    $stmt = $pdo->prepare("
+    SELECT users.username, reviews.content
+    FROM reviews
+    JOIN users ON reviews.user_id = users.id
+    WHERE reviews.title = ?
+    ORDER BY reviews.created_at DESC
+    ");
     $stmt->execute([$title]);
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
