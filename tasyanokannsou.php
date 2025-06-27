@@ -78,7 +78,7 @@ try {
               <div class="user-icon"><?= htmlspecialchars(mb_substr($r['username'], 0, 1)) ?></div>
             </a>
             <div>
-              <strong><?= htmlspecialchars($r['user']) ?></strong> さんの感想：
+              <strong><?= htmlspecialchars($r['username']) ?></strong> さんの感想：
               <p style="margin-top: 6px;"><?= nl2br(htmlspecialchars($r['content'])) ?></p>
             </div>
           </div>
