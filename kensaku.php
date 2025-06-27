@@ -1,17 +1,14 @@
 <?php
+
 session_start();
 
-// 入力値から仮のユーザー情報を作成（何を使ってもOK）
-$email = $_POST['email'] ?? 'guest@example.com';
-$username = explode('@', $email)[0]; // メールの前半をユーザー名として使う
-$user_id = rand(1000, 9999); // 適当なIDを割り当て（本当はDBのIDなど）
-
-// セッションに保存（これが「ログインした状態」）
-$_SESSION['user_id'] = $user_id;
-$_SESSION['username'] = $username;
+// ログインチェック
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit;
+}
 
 
-exit;
 
 $books = [];
 
