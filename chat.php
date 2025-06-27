@@ -32,12 +32,12 @@
         </div>
 
         <div class="mypage-button">
-            <a href="gamen4.php" class="btn">マイページ</a>
+            <a href="mypage.php" class="btn">マイページ</a>
         </div>
 
 
         <div style="margin-top: 20px;">
-            <a href="kansou.php" class="btn">感想投稿に戻る</a>
+            <a href="kannsou.php" class="btn">感想投稿に戻る</a>
         </div>
     </div>
 </body>
