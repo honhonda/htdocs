@@ -1,19 +1,32 @@
+
 <?php
+// セッションスタートが必要なら
+session_start();
+
 $title = $_GET['title'] ?? 'タイトル不明';
 $reviews = [];
 
-if (file_exists('reviews.txt')) {
-  $lines = file('reviews.txt', FILE_IGNORE_NEW_LINES);
-  foreach ($lines as $line) {
-    $parts = explode("\t", $line);
-    if (count($parts) < 3) continue;
-    list($t, $user, $comment) = $parts;
-    if ($t === $title) {
-      $reviews[] = ['user' => $user, 'comment' => $comment];
-    }
-  }
+// DB接続情報
+$host = 'localhost';
+$dbname = 'mydb';
+$user = 'testuser';
+$pass = 'pass';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // タイトルに一致する感想を取得
+    $stmt = $pdo->prepare("SELECT username, content FROM reviews WHERE title = ?");
+    $stmt->execute([$title]);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    die("DB接続エラー: " . htmlspecialchars($e->getMessage()));
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="ja">
