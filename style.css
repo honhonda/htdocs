@@ -164,3 +164,32 @@ h1, h2 {
   font-size: 14px;
   color: #777;
 }
+
+.work-item {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+.work-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #333;
+    display: flex;                /* タイトルと星を横並びに */
+    align-items: center;          /* 縦位置を揃える */
+    gap: 10px;                   /* タイトルと星の間に隙間 */
+    margin-bottom: 8px;
+}
+
+.stars {
+    color: #f5c518;              /* 星の色（ゴールド） */
+    font-size: 1.1rem;
+    user-select: none;           /* 星のテキスト選択を防止 */
+}
+
+.comment {
+    font-size: 1rem;
+    color: #555;
+    white-space: pre-wrap;       /* 改行を反映させる */
+    line-height: 1.5;
+}
