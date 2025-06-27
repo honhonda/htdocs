@@ -35,7 +35,7 @@ $title = $_GET['title'] ?? 'タイトル不明';
             <button type="submit" class="btn">投稿</button>
         </form>
 
-        <!-- 他の人の感想を見るボタン（gamen6.php に title を渡す） -->
+        <!-- 他の人の感想を見るボタン（tasyanokannsou.php に title を渡す） -->
         <form action="tasyanokansou.php" method="GET" style="margin-top: 20px;">
             <input type="hidden" name="title" value="<?= htmlspecialchars($title) ?>">
             <button type="submit" class="btn">他の人の感想を見る</button>
