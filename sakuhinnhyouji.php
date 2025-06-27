@@ -8,7 +8,7 @@ $totalItems = 0;
 if (!empty($_GET['q'])) {
     $keyword = $_GET['q'];
     $query = urlencode("inauthor:{$keyword}+OR+intitle:{$keyword}");
-    $url = "https://www.googleapis.com/books/v1/volumes?q={$query}&startIndex={$startIndex}&maxResults={$perPage}&orderBy=relevance";
+    $url = "https://www.googleapis.com/books/v1/volumes?q={$query}&startIndex={$startIndex}&maxResults={$perPage}&orderBy=newest";
 
     $json = @file_get_contents($url);
     $data = json_decode($json, true);
