@@ -2,12 +2,7 @@
 <?php
 session_start();
 
-// ここで好きなuser_idをセット（たとえばメールから簡単に作るなど）
-$_SESSION['user_id'] = 1;  // 任意の固定値や、POSTされた値から設定してもいい
-$_SESSION['username'] = 'テストユーザー';
 
-header('Location: mypage.php');
-exit;
 ?>
 
 
