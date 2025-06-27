@@ -41,7 +41,7 @@ if (file_exists('reviews.txt')) {
 <body>
 
   <div class="mypage-button">
-    <a href="gamen4.php" class="btn">マイページ</a>
+    <a href="mypage.php" class="btn">マイページ</a>
   </div>
 
   <div class="section">
@@ -53,7 +53,7 @@ if (file_exists('reviews.txt')) {
       <?php foreach ($reviews as $r): ?>
         <div class="notice-box">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <a href="gamen7.php?user=<?= urlencode($r['user']) ?>" class="user-icon-link">
+            <a href="tasyanomypage.php?user=<?= urlencode($r['user']) ?>" class="user-icon-link">
               <div class="user-icon"><?= htmlspecialchars(mb_substr($r['user'], 0, 1)) ?></div>
             </a>
             <div>
@@ -65,7 +65,7 @@ if (file_exists('reviews.txt')) {
       <?php endforeach; ?>
     <?php endif; ?>
 
-    <a href="gamen5.php?title=<?= urlencode($title) ?>" class="btn" style="margin-top: 20px;">← 感想を投稿する</a>
+    <a href="kansou.php?title=<?= urlencode($title) ?>" class="btn" style="margin-top: 20px;">← 感想を投稿する</a>
   </div>
 
 </body>

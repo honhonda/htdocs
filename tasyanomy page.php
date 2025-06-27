@@ -38,7 +38,7 @@ if (file_exists('reviews.txt')) {
 <body>
 
   <div class="mypage-button">
-    <a href="gamen4.php" class="btn">マイページ</a>
+    <a href="mypage.php" class="btn">マイページ</a>
   </div>
 
   <div class="section">
@@ -55,7 +55,7 @@ if (file_exists('reviews.txt')) {
       <?php endforeach; ?>
     <?php endif; ?>
 
-    <a href="gamen6.php?title=<?= urlencode($reviews[0]['title'] ?? '') ?>" class="btn">← 感想一覧に戻る</a>
+    <a href="tasyanokannsou.php?title=<?= urlencode($reviews[0]['title'] ?? '') ?>" class="btn">← 感想一覧に戻る</a>
   </div>
 
 </body>
