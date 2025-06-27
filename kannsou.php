@@ -7,6 +7,15 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 // 以下、投稿処理
+$title = '';
+if (isset($_GET['title'])) {
+    $title = $_GET['title'];
+} elseif (isset($_POST['title'])) {
+    $title = $_POST['title'];
+} else {
+    $title = 'タイトル不明';  // タイトルがない場合のデフォルト
+}
+
 ?>
 
 <!DOCTYPE html>
