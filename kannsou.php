@@ -1,6 +1,12 @@
 <?php
 session_start();
-$title = $_GET['title'] ?? 'タイトル不明';
+
+if (!isset($_SESSION['user_id'])) {
+    die('ログインしていません。');
+}
+
+$user_id = $_SESSION['user_id'];
+// 以下、投稿処理
 ?>
 
 <!DOCTYPE html>

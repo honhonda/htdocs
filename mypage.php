@@ -2,9 +2,14 @@
 session_start();
 
 
+if (!isset($_SESSION['user_id'])) {
+    // ログインしていなければログインページなどへリダイレクト
+    header('Location: login.php');
+    exit;
+}
 
+$username = $_SESSION['username'] ?? 'ユーザー';
 $user_id = $_SESSION['user_id'];
-$username = $_SESSION['username'] ?? 'ユーザー'; // 任意
 
 // DB接続設定
 $host = 'localhost';
