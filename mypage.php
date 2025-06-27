@@ -71,17 +71,14 @@ function printStars($count) {
                         <span class="stars"><?= printStars((int)$review['rating']) ?></span>
                     </div>
                     <div class="comment"><?= nl2br(htmlspecialchars($review['content'])) ?></div>
-                    <form action="edit.php" method="GET">
-                        <input type="hidden" name="title" value="<?= htmlspecialchars($review['title']) ?>">
-                        <button class="edit-button">修正</button>
-                    </form>
+
                 </div>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
 
     <div class="back-link">
-        <a href="index.php">← トップページへ</a>
+        <a href="kensaku.php">← トップページへ</a>
     </div>
 </div>
 
