@@ -1,6 +1,9 @@
 <?php
 // ここでセッション開始など必要に応じて追加可能
 session_start();
+// ログイン成功後に user_id をセッションに保存
+$_SESSION['user_id'] = $user['id'];  // ユーザーのIDを格納
+$_SESSION['username'] = $user['username']; // 任意：名前など
 
 ?>
 

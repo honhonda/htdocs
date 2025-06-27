@@ -2,9 +2,16 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['user_id'])) {
+    die("ログインしていません。"); // またはログインページにリダイレクト
+}
+
+$user_id = $_SESSION['user_id'];
+
 $title = $_POST['title'] ?? 'タイトル不明';
 $content = $_POST['content'] ?? '';
-$rating = $_POST['rating'] ?? null;
+$rating = isset($_POST['rating']) ? (int)$_POST['rating'] : null;
+
 
 // DB接続情報
 $host = 'localhost'; 
@@ -19,8 +26,8 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // 例: submit.php にて
-    $user_id = $_SESSION['user_id'];
+
+
     $stmt = $pdo->prepare("INSERT INTO reviews (title, content, rating, user_id) VALUES (?, ?, ?, ?)"); 
     $stmt->execute([$title, $content, $rating, $user_id]);
 
