@@ -1,11 +1,14 @@
 <?php
 session_start();
 
-// ログインチェック（未ログイン時の処理も追加）
-if (!isset($_SESSION['user_id'])) {
-    header('Location: mypage.php');
+
+
+if (isset($_SESSION['user_id'])) {
+    header('Location: mypage.php');  // すでにログイン済みならマイページへ
     exit;
 }
+// ↓ログインフォームの処理はここから
+
 
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'] ?? 'ユーザー'; // 任意
@@ -38,6 +41,7 @@ function printStars($count) {
     return $stars;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
