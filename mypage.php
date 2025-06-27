@@ -3,7 +3,7 @@ session_start();
 
 // ログインチェック（未ログイン時の処理も追加）
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: mypage.php');
     exit;
 }
 
