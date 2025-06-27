@@ -10,8 +10,7 @@ $user_id = rand(1000, 9999); // 適当なIDを割り当て（本当はDBのIDな
 $_SESSION['user_id'] = $user_id;
 $_SESSION['username'] = $username;
 
-// マイページなどへ遷移
-header('Location: mypage.php');
+
 exit;
 
 $books = [];
