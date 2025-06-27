@@ -75,11 +75,11 @@ try {
         <div class="notice-box">
           <div style="display: flex; align-items: center; gap: 12px;">
             <a href="tasyanomypage.php?user=<?= urlencode($r['user']) ?>" class="user-icon-link">
-              <div class="user-icon"><?= htmlspecialchars(mb_substr($r['user'], 0, 1)) ?></div>
+              <div class="user-icon"><?= htmlspecialchars(mb_substr($r['username'], 0, 1)) ?></div>
             </a>
             <div>
               <strong><?= htmlspecialchars($r['user']) ?></strong> さんの感想：
-              <p style="margin-top: 6px;"><?= nl2br(htmlspecialchars($r['comment'])) ?></p>
+              <p style="margin-top: 6px;"><?= nl2br(htmlspecialchars($r['content'])) ?></p>
             </div>
           </div>
         </div><br>
