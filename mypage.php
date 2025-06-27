@@ -52,38 +52,38 @@ function printStars($count) {
 </head>
 <body>
 
-<div class="container">
-    <div class="profile-header">
-        <div class="avatar"><?= htmlspecialchars(mb_substr($username, 0, 1)) ?></div>
-        <div>
-            <div class="username"><?= htmlspecialchars($username) ?></div>
-        </div>
-    </div>
-
-    <h1><span class="accent">投稿した作品一覧</span></h1>
-
-    <?php if (count($reviews) === 0): ?>
-        <p>まだ感想は投稿されていません。</p>
-    <?php else: ?>
-        <?php foreach ($reviews as $review): ?>
-            <div class="work-item">
-                <div class="thumbnail"></div>
-                <div class="work-details">
-                    <div class="work-title">
-                        <?= htmlspecialchars($review['title']) ?>
-                        <span class="stars"><?= printStars((int)$review['rating']) ?></span>
-                    </div>
-                    <div class="comment"><?= nl2br(htmlspecialchars($review['content'])) ?></div>
-
-                </div>
+    <div class="container">
+        <div class="profile-header">
+            <div class="avatar"><?= htmlspecialchars(mb_substr($username, 0, 1)) ?></div>
+            <div>
+                <div class="username"><?= htmlspecialchars($username) ?></div>
             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+         </div>
 
-    <div class="back-link">
-        <a href="kensaku.php">← トップページへ</a>
+        <h1><span class="accent">投稿した作品一覧</span></h1>
+
+        <?php if (count($reviews) === 0): ?>
+            <p>まだ感想は投稿されていません。</p>
+        <?php else: ?>
+            <?php foreach ($reviews as $review): ?>
+                <div class="work-item">
+                    <div class="thumbnail"></div>
+                    <div class="work-details">
+                        <div class="work-title">
+                             <?= htmlspecialchars($review['title']) ?>
+                             <span class="stars"><?= printStars((int)$review['rating']) ?></span>
+                        </div>
+                        <div class="comment"><?= nl2br(htmlspecialchars($review['content'])) ?></div>
+
+                    </div>
+                </div>
+             <?php endforeach; ?>
+        <?php endif; ?>
+
+         <div class="back-link">
+             <a href="kensaku.php">← トップページへ</a>
+         </div>
     </div>
-</div>
 
 </body>
 </html>
