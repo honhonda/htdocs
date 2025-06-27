@@ -32,6 +32,8 @@ exit;
 
             <button type="submit">ログイン</button>
         </form>
+    
+
     </div>
 
     <div class="notes">
