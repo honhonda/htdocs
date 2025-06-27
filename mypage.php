@@ -3,8 +3,6 @@ session_start();
 
 
 
-
-
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'] ?? 'ユーザー'; // 任意
 
@@ -19,7 +17,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // 自分のレビューのみ取得
-    $stmt = $pdo->prepare("SELECT title, rating, content FROM reviews WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt = $pdo->query("SELECT title, rating, content FROM reviews ORDER BY created_at DESC");
+
     $stmt->execute([$user_id]);
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
