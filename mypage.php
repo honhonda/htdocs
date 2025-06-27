@@ -3,11 +3,6 @@ session_start();
 
 
 
-if (isset($_SESSION['user_id'])) {
-    header('Location: mypage.php');  // すでにログイン済みならマイページへ
-    exit;
-}
-// ↓ログインフォームの処理はここから
 
 
 $user_id = $_SESSION['user_id'];

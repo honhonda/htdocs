@@ -1,12 +1,6 @@
 <?php
 // ここでセッション開始など必要に応じて追加可能
 session_start();
-// login.php にはこのようにしておくと安全
-if (isset($_SESSION['user_id'])) {
-    header('Location: mypage.php');  // すでにログイン済みならマイページへ
-    exit;
-}
-// ↓ログインフォームの処理はここから
 
 ?>
 
