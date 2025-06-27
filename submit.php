@@ -61,7 +61,7 @@ try {
 
         <div style="margin-top: 30px; text-align: center;">
             <a href="mypage.php" class="btn">マイページへ戻る</a>
-            <a href="tasyanokansou.php?title=<?= urlencode($title) ?>" class="btn">他の人の感想を見る</a>
+            <a href="tasyanokannsou.php?title=<?= urlencode($title) ?>" class="btn">他の人の感想を見る</a>
         </div>
     <?php else: ?>
         <div class="notice-box" style="border-left-color: #ff4d4d; background-color: #ffecec;">

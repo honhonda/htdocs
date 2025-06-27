@@ -65,7 +65,7 @@ if (file_exists('reviews.txt')) {
       <?php endforeach; ?>
     <?php endif; ?>
 
-    <a href="kansou.php?title=<?= urlencode($title) ?>" class="btn" style="margin-top: 20px;">← 感想を投稿する</a>
+    <a href="kannsou.php?title=<?= urlencode($title) ?>" class="btn" style="margin-top: 20px;">← 感想を投稿する</a>
   </div>
 
 </body>
