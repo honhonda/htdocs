@@ -26,7 +26,7 @@ try {
     $stmt->execute([$user_id]);
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
 
 } catch (PDOException $e) {
     die("DB接続エラー: " . htmlspecialchars($e->getMessage()));
