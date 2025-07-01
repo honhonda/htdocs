@@ -1,7 +1,7 @@
 <?php
-// セッション開始（必要であれば）
 session_start();
 
+// ユーザー名（username）を取得
 $username = $_GET['user'] ?? '';
 $reviews = [];
 
@@ -9,7 +9,7 @@ if (empty($username)) {
     die('ユーザーが指定されていません。');
 }
 
-// DB接続情報
+// DB接続設定
 $host = 'localhost';
 $dbname = 'mydb';
 $user = 'testuser';
@@ -19,28 +19,24 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // ユーザー名からユーザーID取得
+    // username → id を取得
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
-    
-
     $stmt->execute([$username]);
     $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$userRow) {
-        die('ユーザーが存在しません。');
+        die('指定されたユーザーは存在しません。');
     }
 
     $user_id = $userRow['id'];
 
-    // そのユーザーのレビュー一覧を取得
-    $stmt = $pdo->prepare("SELECT title, content, rating FROM reviews WHERE user_id = ? ORDER BY id DESC");
-
+    // 該当ユーザーのレビュー取得
+    $stmt = $pdo->prepare("SELECT title, content, rating, created_at FROM reviews WHERE user_id = ? ORDER BY created_at DESC");
     $stmt->execute([$user_id]);
-
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
-    die("DBエラー: " . htmlspecialchars($e->getMessage()));
+    die("DB接続エラー: " . htmlspecialchars($e->getMessage()));
 }
 
 // 星表示関数
@@ -52,3 +48,54 @@ function printStars($count) {
     return $stars;
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title><?= htmlspecialchars($username) ?> さんの投稿一覧</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .section {
+            width: 90%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .notice-box {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #1e90ff;
+            border-radius: 5px;
+        }
+
+        .mypage-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+        }
+
+        .btn {
+            background: #1e90ff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #187bcd;
+        }
+
+        .accent {
+            color: #1e90ff;
+        }
+    </style>
+</head>
+<body
