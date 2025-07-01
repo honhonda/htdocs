@@ -102,7 +102,10 @@ function printStars($count) {
 
 <div class="mypage-button">
     <a href="mypage.php" class="btn">マイページに戻る</a>
+    <a href="chat.php?partner=<?= urlencode($username) ?>" class="btn">このユーザーとチャットする</a>
+
 </div>
+
 
 <div class="section">
     <h1 class="accent"><?= htmlspecialchars($username) ?> さんの感想一覧</h1>
