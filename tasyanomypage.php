@@ -98,4 +98,28 @@ function printStars($count) {
         }
     </style>
 </head>
-<body
+<body>
+
+<div class="mypage-button">
+    <a href="mypage.php" class="btn">マイページに戻る</a>
+</div>
+
+<div class="section">
+    <h1 class="accent"><?= htmlspecialchars($username) ?> さんの感想一覧</h1>
+
+    <?php if (empty($reviews)): ?>
+        <p>このユーザーの感想はまだありません。</p>
+    <?php else: ?>
+        <?php foreach ($reviews as $r): ?>
+            <div class="notice-box">
+                <strong>作品タイトル：</strong><?= htmlspecialchars($r['title']) ?><br>
+                <strong>評価：</strong><?= printStars((int)$r['rating']) ?><br>
+                <strong>投稿日時：</strong><?= htmlspecialchars($r['created_at']) ?><br>
+                <p style="margin-top: 8px;"><?= nl2br(htmlspecialchars($r['content'])) ?></p>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
+</body>
+</html>
