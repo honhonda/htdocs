@@ -1,62 +1,50 @@
 <?php
-$user = $_GET['user'] ?? '未指定';
+// セッション開始（必要であれば）
+session_start();
+
+$username = $_GET['user'] ?? '';
 $reviews = [];
 
-if (file_exists('reviews.txt')) {
-  $lines = file('reviews.txt', FILE_IGNORE_NEW_LINES);
-  foreach ($lines as $line) {
-    $parts = explode("\t", $line);
-    if (count($parts) < 3) continue;
-    list($title, $u, $comment) = $parts;
-    if ($u === $user) {
-      $reviews[] = ['title' => $title, 'comment' => $comment];
+if (empty($username)) {
+    die('ユーザーが指定されていません。');
+}
+
+// DB接続情報
+$host = 'localhost';
+$dbname = 'mydb';
+$user = 'testuser';
+$pass = 'pass';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // ユーザー名からユーザーID取得
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$userRow) {
+        die('ユーザーが存在しません。');
     }
-  }
+
+    $user_id = $userRow['id'];
+
+    // そのユーザーのレビュー一覧を取得
+    $stmt = $pdo->prepare("SELECT title, content, rating FROM reviews WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt->execute([$user_id]);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    die("DBエラー: " . htmlspecialchars($e->getMessage()));
+}
+
+// 星表示関数
+function printStars($count) {
+    $stars = '';
+    for ($i = 0; $i < 5; $i++) {
+        $stars .= $i < $count ? '★' : '☆';
+    }
+    return $stars;
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title><?= htmlspecialchars($user) ?> さんの感想一覧</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .user-icon {
-      width: 40px;
-      height: 40px;
-      background-color: #1e90ff;
-      color: white;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 40px;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="mypage-button">
-    <a href="mypage.php" class="btn">マイページ</a>
-  </div>
-
-  <div class="section">
-    <h1 class="accent"><?= htmlspecialchars($user) ?> さんの感想</h1>
-
-    <?php if (empty($reviews)): ?>
-      <p>このユーザーの感想はまだありません。</p>
-    <?php else: ?>
-      <?php foreach ($reviews as $r): ?>
-        <div class="notice-box">
-          <strong>作品タイトル：</strong><?= htmlspecialchars($r['title']) ?><br>
-          <p style="margin-top: 6px;"><?= nl2br(htmlspecialchars($r['comment'])) ?></p>
-        </div><br>
-      <?php endforeach; ?>
-    <?php endif; ?>
-
-    <a href="tasyanokannsou.php?title=<?= urlencode($reviews[0]['title'] ?? '') ?>" class="btn">← 感想一覧に戻る</a>
-  </div>
-
-</body>
-</html>
