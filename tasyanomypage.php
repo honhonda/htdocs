@@ -21,6 +21,8 @@ try {
 
     // ユーザー名からユーザーID取得
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
+    
+
     $stmt->execute([$username]);
     $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -31,8 +33,10 @@ try {
     $user_id = $userRow['id'];
 
     // そのユーザーのレビュー一覧を取得
-    $stmt = $pdo->prepare("SELECT title, content, rating FROM reviews WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt = $pdo->prepare("SELECT title, content, rating FROM reviews WHERE user_id = ? ORDER BY id DESC");
+
     $stmt->execute([$user_id]);
+
     $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
