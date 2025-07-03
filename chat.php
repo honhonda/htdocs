@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id']) || !isset($_GET['user'])) {
+if (!isset($_SESSION['user_id']) || !isset($_GET['title'])) {
     die('アクセスが不正です');
 }
 
