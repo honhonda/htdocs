@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id']) || !isset($_GET['title'])) {
 }
 
 $self_id = $_SESSION['user_id'];
-$self_name = $_SESSION['username'] ?? '自分';
+$self_name = $_SESSION['username'];
 $partner_name = $_GET['user'];
 
 $host = 'localhost';
