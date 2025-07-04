@@ -1,11 +1,10 @@
 <?php
 session_start();
-var_dump($_SESSION['user_id'], $_SESSION['username']);
-exit;
+
 
 // テストでユーザーIDを明示的にセット（usersテーブルに存在するIDに変更）
 if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 1; // 存在するIDに
+    $_SESSION['user_id'] = 3635; // 存在するIDに
     $_SESSION['username'] = 'h.masahiro';
 }
 
