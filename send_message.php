@@ -1,5 +1,7 @@
 <?php
 session_start();
+var_dump($_SESSION['user_id']);
+exit;
 
 // テストでユーザーIDを明示的にセット（usersテーブルに存在するIDに変更）
 if (!isset($_SESSION['user_id'])) {
