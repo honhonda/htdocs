@@ -1,5 +1,8 @@
 <?php
 session_start();
+var_dump($_SESSION['user_id']);
+exit;
+
 
 if (!isset($_SESSION['user_id']) || !isset($_POST['receiver']) || !isset($_POST['message'])) {
     die('必要な情報が不足しています');
