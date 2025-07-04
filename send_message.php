@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION['user_id']);
+var_dump($_SESSION['user_id'], $_SESSION['username']);
 exit;
 
 // テストでユーザーIDを明示的にセット（usersテーブルに存在するIDに変更）
