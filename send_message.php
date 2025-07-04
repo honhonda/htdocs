@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+echo 'sender_id = ' . ($_SESSION['user_id'] ?? '未設定') . '<br>';
+
 $sender_id = $_SESSION['user_id'] ?? null;
 $receiver_name = $_POST['receiver'] ?? '';
 $message = $_POST['message'] ?? '';
