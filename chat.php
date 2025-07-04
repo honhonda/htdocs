@@ -1,11 +1,15 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id']) || !isset($_GET['partner'])) {
-    die('アクセスが不正です');
+if (!isset($_SESSION['user_id'])) {
+    // テストユーザーでログイン中ということにする
+    $_SESSION['user_id'] = 2;
+    $_SESSION['username'] = 'tanaka';
 }
-$_SESSION['user_id'] = 2;  // h.masahiro の ID
-$_SESSION['username'] = 'tanaka';
+
+session_start();
+
+
 
 $self_id = $_SESSION['user_id'];
 $self_name = $_SESSION['username'];
