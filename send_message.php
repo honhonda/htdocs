@@ -22,7 +22,7 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // 相手のユーザーIDを取得
+    // 相手ユーザーID取得
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->execute([$partner_name]);
     $partner = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,11 +32,11 @@ try {
     }
     $partner_id = $partner['id'];
 
-    // メッセージを挿入
+    // メッセージをDBに挿入
     $stmt = $pdo->prepare("INSERT INTO messages (sender_id, receiver_id, message, created_at) VALUES (?, ?, ?, NOW())");
     $stmt->execute([$self_id, $partner_id, $message]);
 
-    // チャット画面へリダイレクト（partnerパラメータを忘れずに）
+    // チャット画面にリダイレクト
     header('Location: chat.php?partner=' . urlencode($partner_name));
     exit;
 
