@@ -8,6 +8,7 @@ if (!$sender_id || !$receiver_name || !$message) {
     die('必要な情報が不足しています');
 }
 
+
 // DB接続
 $host = 'localhost';
 $dbname = 'mydb';

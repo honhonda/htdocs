@@ -182,7 +182,7 @@ try {
 
   <form class="input-area" action="send_message.php" method="POST">
     <textarea name="message" rows="2" required></textarea>
-    <input type="hidden" name="partner" value="<?= htmlspecialchars($partner_name) ?>">
+    <input type="hidden" name="receiver" value="<?= htmlspecialchars($partner_name) ?>">
     <button type="submit">送信</button>
   </form>
 </div>
