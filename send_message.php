@@ -6,7 +6,10 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$title = $_POST['title'];
+$title = $_POST['title'] ?? null;
+if (empty($title)) {
+    die('タイトルが指定されていません');
+}
 $partner_name = $_POST['partner'] ?? '';
 $message = trim($_POST['message']);
 

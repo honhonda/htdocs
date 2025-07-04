@@ -127,11 +127,13 @@ try {
     </div>
   <?php endforeach; ?>
 
-  <form class="input-area" action="send_message.php" method="POST">
+  <form action="send_message.php" method="POST" class="input-area">
     <textarea name="message" rows="2" required></textarea>
-    <input type="hidden" name="receiver" value="<?= htmlspecialchars($partner_name) ?>">
+    <input type="hidden" name="partner" value="<?= htmlspecialchars($partner_name) ?>">
+    <input type="hidden" name="title" value="<?= htmlspecialchars($title) ?>">
     <button type="submit">送信</button>
   </form>
+
 </div>
 </body>
 </html>
