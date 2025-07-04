@@ -1,12 +1,10 @@
 <?php
 session_start();
-var_dump($_SESSION['user_id']);
-exit;
-
-
-if (!isset($_SESSION['user_id']) || !isset($_POST['receiver']) || !isset($_POST['message'])) {
-    die('必要な情報が不足しています');
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = 2; // usersテーブルに存在するIDに書き換えてください
+    $_SESSION['username'] = 'tanaka'; // 対応するユーザー名
 }
+
 
 $self_id = $_SESSION['user_id'];
 $message = trim($_POST['message']);
