@@ -43,3 +43,4 @@ try {
 } catch (PDOException $e) {
     die('DBエラー: ' . htmlspecialchars($e->getMessage()));
 }
+?>
