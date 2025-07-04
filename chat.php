@@ -7,8 +7,9 @@ if (!isset($_SESSION['user_id']) || !isset($_GET['title'])) {
 
 $self_id = $_SESSION['user_id'];
 $self_name = $_SESSION['username'];
-$partner_name = $_GET['user'];
+$title = $_GET['title'];
 
+// DB接続情報
 $host = 'localhost';
 $dbname = 'mydb';
 $user = 'testuser';
@@ -18,25 +19,19 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // 相手のユーザーID取得
-    $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
-    $stmt->execute([$partner_name]);
-    $partner = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$partner) {
-        die('相手ユーザーが見つかりません');
-    }
-    $partner_id = $partner['id'];
-
-    // チャット履歴取得
-    $stmt = $pdo->prepare("SELECT sender_id, message, created_at FROM messages
-                           WHERE (sender_id = ? AND receiver_id = ?)
-                              OR (sender_id = ? AND receiver_id = ?)
-                           ORDER BY created_at ASC");
-    $stmt->execute([$self_id, $partner_id, $partner_id, $self_id]);
+    // チャット履歴取得（作品ごと）
+    $stmt = $pdo->prepare("
+        SELECT messages.sender, messages.message, messages.created_at, users.username 
+        FROM messages 
+        JOIN users ON messages.sender = users.id 
+        WHERE messages.title = ? 
+        ORDER BY messages.created_at ASC
+    ");
+    $stmt->execute([$title]);
     $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
-    die("DB接続エラー: " . htmlspecialchars($e->getMessage()));
+    die("DBエラー: " . htmlspecialchars($e->getMessage()));
 }
 ?>
 
