@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $title = $_POST['title'];
+$partner_name = $_POST['partner'] ?? '';
 $message = trim($_POST['message']);
 
 if ($message === '') {
