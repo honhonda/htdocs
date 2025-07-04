@@ -11,7 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 
 $self_id = $_SESSION['user_id'];
 $self_name = $_SESSION['username'];
-$partner_name = $_GET['partner'];
+$partner_name = $_GET['partner'] ?? '';
+if ($partner_name === '') {
+    die('相手ユーザーが指定されていません');
+}
+
 
 $host = 'localhost';
 $dbname = 'mydb';
