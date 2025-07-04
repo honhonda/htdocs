@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id']) || !isset($_GET['partner'])) {
     die('アクセスが不正です');
 }
 
+
 $self_id = $_SESSION['user_id'];
 $self_name = $_SESSION['username'];
 $partner_name = $_GET['partner'];

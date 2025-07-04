@@ -1,12 +1,15 @@
 <?php
 session_start();
+
 $sender_id = $_SESSION['user_id'] ?? null;
 $receiver_name = $_POST['receiver'] ?? '';
 $message = $_POST['message'] ?? '';
 
-if (!$sender_id || !$receiver_name || !$message) {
+if (!$sender_id || !$receiver_name || trim($message) === '') {
     die('必要な情報が不足しています');
 }
+
+
 
 
 // DB接続
