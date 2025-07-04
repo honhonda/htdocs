@@ -4,8 +4,8 @@ session_start();
 if (!isset($_SESSION['user_id']) || !isset($_GET['partner'])) {
     die('アクセスが不正です');
 }
-$_SESSION['user_id'] = 1;  // h.masahiro の ID
-$_SESSION['username'] = 'h.masahiro';
+$_SESSION['user_id'] = 2;  // h.masahiro の ID
+$_SESSION['username'] = 'tanaka';
 
 $self_id = $_SESSION['user_id'];
 $self_name = $_SESSION['username'];
