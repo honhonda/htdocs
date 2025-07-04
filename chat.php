@@ -7,8 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     $_SESSION['username'] = 'tanaka';
 }
 
-session_start();
-
 
 
 $self_id = $_SESSION['user_id'];
