@@ -53,129 +53,127 @@ try {
 <meta charset="UTF-8">
 <title><?= htmlspecialchars($partner_name) ?> さんとのチャット</title>
 <style>
-   body {
-   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   background-color: #e5ddd5;
-   margin: 0;
-   padding: 0;
-   height: 100vh;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-   .chat-container {
-   background-color: #fff;
-   width: 400px;
-   max-width: 95vw;
-   height: 600px;
-   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-   border-radius: 10px;
-   display: flex;
-   flex-direction: column;
-   overflow: hidden;
-   }
+  .chat-container {
+    width: 90%;
+    max-width: 600px;
+    height: 600px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 
-   .chat-header {
-   background-color: #075e54;
-   color: white;
-   padding: 15px 20px;
-   font-weight: bold;
-   font-size: 1.2rem;
-   }
+  .chat-header {
+    padding: 20px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
 
-   .chat-messages {
-   flex: 1;
-   padding: 15px 20px;
-   overflow-y: auto;
-   background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
-   background-repeat: repeat;
-   background-size: 50px 50px;
-   }
+  .chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f0f2f5;
+  }
 
-   .message {
-   display: flex;
-   margin-bottom: 12px;
-   }
+  .message {
+    display: flex;
+    margin-bottom: 14px;
+  }
 
-   .message.self {
-   justify-content: flex-end;
-   }
+  .message.self {
+    justify-content: flex-end;
+  }
 
-   .message.other {
-   justify-content: flex-start;
-   }
+  .message.other {
+    justify-content: flex-start;
+  }
 
-   .bubble {
+  .bubble {
     max-width: 70%;
-    padding: 10px 15px;
-    border-radius: 20px;
+    padding: 12px 18px;
+    border-radius: 18px;
     font-size: 1rem;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     word-wrap: break-word;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1); 
-   }
+  }
 
-   .message.self .bubble {
+  .message.self .bubble {
     background-color: #dcf8c6;
-    border-bottom-right-radius: 5px;
-   }
+    border-bottom-right-radius: 6px;
+  }
 
-   .message.other .bubble {
+  .message.other .bubble {
     background-color: #fff;
     border: 1px solid #ccc;
-    border-bottom-left-radius: 5px;
-   }
+    border-bottom-left-radius: 6px;
+  }
 
-   .input-area {
+  .input-area {
     display: flex;
-    padding: 10px 15px;
-    border-top: 1px solid #ddd;
-    background-color: #f7f7f7;
-   }
+    padding: 15px 20px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+  }
 
-   textarea {
+  .input-area textarea {
     flex: 1;
     resize: none;
-    padding: 10px;
-    border-radius: 18px;
-    border: 1px solid #ccc;
+    padding: 12px 15px;
     font-size: 1rem;
-    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
     outline: none;
-    transition: border-color 0.2s ease;
-   }
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
 
-   textarea:focus {
-    border-color: #075e54;
-   }
+  .input-area textarea:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 6px rgba(30,144,255,0.4);
+  }
 
-   button {
-    background-color: #075e54;
+  .input-area button {
+    margin-left: 15px;
+    background-color: #1e90ff;
     color: white;
     border: none;
-    border-radius: 18px;
-    padding: 0 20px;
-    margin-left: 10px;
+    border-radius: 12px;
+    padding: 0 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background-color 0.2s ease;
-   }
+    transition: background-color 0.3s;
+  }
 
-   button:hover {
-    background-color: #0a7f68;
-   }
+  .input-area button:hover {
+    background-color: #1c7cd6;
+  }
 
-/* スクロールバーのスタイル (Webkit系ブラウザ) */
-   .chat-messages::-webkit-scrollbar {
+  /* スクロールバー（webkit系） */
+  .chat-messages::-webkit-scrollbar {
     width: 8px;
-   }
-
-   .chat-messages::-webkit-scrollbar-thumb {
+  }
+  .chat-messages::-webkit-scrollbar-thumb {
     background-color: rgba(0,0,0,0.2);
     border-radius: 4px;
-   }
-
+  }
 </style>
 </head>
 <body>
