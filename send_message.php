@@ -1,10 +1,9 @@
 <?php
 session_start();
-var_dump($_SESSION['user_id']);
-exit;
+
 if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 2; // usersテーブルに存在するIDに書き換えてください
-    $_SESSION['username'] = 'tanaka'; // 対応するユーザー名
+    $_SESSION['user_id'] = 1; // usersテーブルに存在するIDに書き換えてください
+    $_SESSION['username'] = 'h.masahiro'; // 対応するユーザー名
 }
 
 
