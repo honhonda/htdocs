@@ -1,35 +1,38 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || !isset($_POST['partner']) || !isset($_POST['message'])) {
     die('アクセスが不正です');
 }
 
-$user_id = $_SESSION['user_id'];
-$title = $_POST['title'] ?? null;
-if (empty($title)) {
-    die('タイトルが指定されていません');
-}
-$partner_name = $_POST['partner'] ?? '';
+$self_id = $_SESSION['user_id'];
+$partner_name = $_POST['partner'];
 $message = trim($_POST['message']);
-
-if ($message === '') {
-    die('メッセージが空です');
-}
 
 $host = 'localhost';
 $dbname = 'mydb';
-$user = 'testuser';
-$pass = 'pass';
+$db_user = 'testuser';
+$db_pass = 'pass';
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->prepare("INSERT INTO messages (sender, title, message, created_at) VALUES (?, ?, ?, NOW())");
-    $stmt->execute([$user_id, $title, $message]);
+    // partnerのユーザーID取得
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
+    $stmt->execute([$partner_name]);
+    $partner = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$partner) {
+        die('相手ユーザーが見つかりません');
+    }
+    $partner_id = $partner['id'];
 
-    header("Location: chat.php?title=" . urlencode($title));
+    // メッセージ挿入
+    $stmt = $pdo->prepare("INSERT INTO messages (sender_id, receiver_id, message, created_at) VALUES (?, ?, ?, NOW())");
+    $stmt->execute([$self_id, $partner_id, $message]);
+
+    // チャット画面へリダイレクト
+    header('Location: chat.php?partner=' . urlencode($partner_name));
     exit;
 
 } catch (PDOException $e) {
